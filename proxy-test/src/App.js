@@ -6,8 +6,8 @@ const serverPort = 3001;
 let proxyIdentifier;
 
 function App() {
-    const [number, setNumber] = useState('');
-    const [name, setName] = useState('');
+    const [number, setNumber] = useState('+491771919691');
+    const [name, setName] = useState('Alla');
     const [noSession, setNoSession] = useState(true);
     const [logs, setLogs] = useState([]);
     const [requestAvailable, setRequestAvailable] = useState(true);
@@ -38,6 +38,7 @@ function App() {
 
         let url = `${baseUrl}:${serverPort}/register`;
         let data = {"number": number, "name": name};
+        console.log("Data: ", data);
         const response = await fetch(url, {
             method: 'POST',
             headers: {
@@ -84,14 +85,14 @@ function App() {
         <div className="App">
             {noSession && <button onClick={init}>Create Session</button>}
             <br/>
-            <input hidden={noSession} placeholder='Name' value={'Alla'} onChange={(e) => {
+            <input hidden={noSession} placeholder='Name' defaultValue={name} onChange={(e) => {
                 setName(e.target.value);
             }}/>
             <br/>
-            <input hidden={noSession} placeholder='Phone Number' value={'+491771919691'} onChange={(e) => {
+            <input hidden={noSession} placeholder='Phone Number' defaultValue={number} onChange={(e) => {
                 setNumber(e.target.value);
             }}/>
-            <br/>fi
+            <br/>
             <button hidden={noSession} onClick={registerPhoneNumber}>Register</button>
             <br/>
             <button hidden={requestAvailable} onClick={requestNumber}>Request a number</button>
